@@ -1,53 +1,46 @@
 from abc import ABC, abstractmethod
 
-class HotBeverage(ABC):
+class AirportCheck(ABC):
     
-    def prepare_recipe(self):
-        self.boil_water()
-        self.brew()
-        self.pour_in_cup()
-        if self.customer_wants_condiments(): 
-            self.add_condiments()
+    def check_passenger(self):
+        self.show_ticket()
+        self.security_scan()
+        self.passport_control() 
+        self.vlog_from_airport() 
+        self.boarding()
 
-    def boil_water(self):
-        print("Кипячение воды...")
+    def show_ticket(self):
+        print("1. Регистрация: Билет проверен, багаж сдан.")
 
-    def pour_in_cup(self):
-        print("Переливание в чашку...")
-
-    @abstractmethod
-    def brew(self):
-        pass
+    def security_scan(self):
+        print("2. Безопасность: Проход через рамку и сканирование сумок.")
 
     @abstractmethod
-    def add_condiments(self):
+    def passport_control(self):
         pass
 
-    def customer_wants_condiments(self):
-        return True
+    def boarding(self):
+        print("4. Посадка: Выход на гейт и посадка в самолет.\n")
 
-class Tea(HotBeverage):
-    def brew(self):
-        print("Заваривание чайного пакетика...")
+    def vlog_from_airport(self):
+        pass
 
-    def add_condiments(self):
-        print("Добавление лимона...")
+class DomesticFlight(AirportCheck):
+    def passport_control(self):
+        print("3. Паспортный контроль: Проверка внутреннего ID (быстрый процесс).")
 
-class Coffee(HotBeverage):
-    def brew(self):
-        print("Пропускание кофе через фильтр...")
+class InternationalFlight(AirportCheck):
+    def passport_control(self):
+        print("3. Таможня: Проверка загранпаспорта, визы и декларации.")
 
-    def add_condiments(self):
-        print("Добавление сахара и молока...")
-
-    def customer_wants_condiments(self):
-        return False
+    def vlog_from_airport(self):
+        print("   [Bonus] Пассажир снимает сторис: 'Улетаю в отпуск!'")
 
 if __name__ == "__main__":
-    print("--- Готовим Чай ---")
-    tea = Tea()
-    tea.prepare_recipe()
+    print("=== ПУТЕШЕСТВИЕ ПО СТРАНЕ ===")
+    traveler1 = DomesticFlight()
+    traveler1.check_passenger()
 
-    print("\n--- Готовим Кофе ---")
-    coffee = Coffee()
-    coffee.prepare_recipe()
+    print("=== ПУТЕШЕСТВИЕ ЗА ГРАНИЦУ ===")
+    traveler2 = InternationalFlight()
+    traveler2.check_passenger()
